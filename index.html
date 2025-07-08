@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para mi Ericita💗</title>
+ <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+      font-family: 'Pacifico', cursive;
+      color: #333;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2.8em;
+      margin-top: 0.5em;
+      animation: fadeIn 2s ease forwards;
+    }
+    p {
+      font-size: 1.6em;
+      max-width: 800px;
+      margin: 1em auto;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 0.5s;
+    }
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    button {
+      background: #ff85a2;
+      border: none;
+      padding: 10px 25px;
+      color: white;
+      font-size: 1.2em;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin: 15px;
+      font-family: 'Dancing Script', cursive;
+    }
+    button:hover {
+      background: #ff4d6d;
+    }
+    .message, .reasons {
+      display: none;
+      text-align: left;
+      max-width: 800px;
+      margin-top: 20px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 15px;
+      padding: 20px;
+      backdrop-filter: blur(4px);
+      font-size: 1.3em;
+    }
+    .reasons li {
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Para ti, mi Ericita 💗</h1>
+  <div style="font-size: 100px; animation: beat 1s infinite;">💗</div>
+  <p>Hoy quiero recordarte lo mucho que te amo y lo especial que eres para mí.</p>
+  <button onclick="showMessage()">Leer un mensaje lindo ✨</button>
+
+  <div class="message" id="messageText">
+    <p>
+      Mi Ericita hermosa, gracias por ser quien eres, por tu ternura, tu alegría y tu forma única de llenar mi vida de luz.
+      No hay palabras que puedan describir todo lo que siento por ti. Cada día que pasa me doy cuenta de que eres lo mejor que me pudo haber pasado.
+      Eres mi inspiración, mi paz y mi felicidad. Siempre quiero verte sonreír, abrazarte y recordarte que eres mi lugar seguro.
+    </p>
+    <button onclick="showReasons()">Ver las 100 razones 💖</button>
+  </div>
+
+  <ul class="reasons" id="reasonsList">
+    <!-- Aquí empiezan las razones, mismas que te di antes -->
+    <li>1. Amo tus hermosos ojitos café oscuro que me derriten.</li>
+    <li>2. Amo tu sonrisa que ilumina mi día.</li>
+    <li>3. Me encanta cómo me tratas con tanta ternura.</li>
+    <li>4. Amo la manera tan linda en la que dibujas.</li>
+    <li>5. Me enamora cómo sabes tocar la guitarra con pasión.</li>
+    <li>6. Admiro lo bien que juegas básquet.</li>
+    <li>7. Me asombra cómo juegas voleibol con tanta energía.</li>
+    <li>8. Estoy seguro de que tus postres serían los más ricos del mundo.</li>
+    <li>9. Amo tu cabello suave y bonito.</li>
+    <li>10. Me encanta cómo te ves con tus lentes.</li>
+    <li>11. Amo tu manera de reír.</li>
+    <li>12. Me encanta cuando me miras con amor.</li>
+    <li>13. Amo que siempre me inspiras a ser mejor.</li>
+    <li>14. Amo tu creatividad infinita.</li>
+    <li>15. Me fascina cómo expresas tus ideas.</li>
+    <li>16. Adoro tus abrazos cálidos.</li>
+    <li>17. Amo cuando me escuchas con atención.</li>
+    <li>18. Amo tu voz que me calma.</li>
+    <li>19. Me encanta soñar contigo.</li>
+    <li>20. Amo tus ocurrencias divertidas.</li>
+    <li>21. Amo tu paciencia conmigo.</li>
+    <li>22. Amo que siempre tienes un detalle lindo.</li>
+    <li>23. Me encanta que me apoyes en todo.</li>
+    <li>24. Amo compartir planes contigo.</li>
+    <li>25. Amo que eres tan inteligente.</li>
+    <li>26. Me inspiras confianza y paz.</li>
+    <li>27. Amo lo fuerte que eres.</li>
+    <li>28. Amo tus sueños hermosos.</li>
+    <li>29. Me encanta admirarte mientras dibujas.</li>
+    <li>30. Amo tu entusiasmo por aprender.</li>
+    <li>31. Amo cuando te emocionas por algo nuevo.</li>
+    <li>32. Amo cómo te esfuerzas por todo lo que amas.</li>
+    <li>33. Me encanta lo talentosa que eres.</li>
+    <li>34. Amo que siempre sabes cómo animarme.</li>
+    <li>35. Amo tu forma única de ver el mundo.</li>
+    <li>36. Amo cuando platicamos por horas.</li>
+    <li>37. Me encanta tu sinceridad.</li>
+    <li>38. Amo tu corazón noble.</li>
+    <li>39. Amo cuando me haces reír sin razón.</li>
+    <li>40. Amo que contigo todo es especial.</li>
+    <li>41. Me encanta pensar en un futuro contigo.</li>
+    <li>42. Amo tu manera de amar a los demás.</li>
+    <li>43. Amo tu generosidad.</li>
+    <li>44. Me encanta tu forma de resolver problemas.</li>
+    <li>45. Amo tu manera de mirar la vida.</li>
+    <li>46. Me inspiras a nunca rendirme.</li>
+    <li>47. Amo cuando me compartes tus historias.</li>
+    <li>48. Amo tu ternura infinita.</li>
+    <li>49. Amo tus gestos de cariño.</li>
+    <li>50. Amo tu valentía.</li>
+    <li>51. Amo cuando compartimos canciones.</li>
+    <li>52. Amo imaginar que cocinas postres deliciosos.</li>
+    <li>53. Amo tus manos cuando dibujan.</li>
+    <li>54. Amo tu energía positiva.</li>
+    <li>55. Amo cuando me miras con tus ojitos brillando.</li>
+    <li>56. Amo tus mensajes lindos.</li>
+    <li>57. Amo cuando me motivas a seguir adelante.</li>
+    <li>58. Amo tus abrazos inesperados.</li>
+    <li>59. Amo tu sentido del humor.</li>
+    <li>60. Amo tu determinación.</li>
+    <li>61. Amo lo bien que juegas voleibol.</li>
+    <li>62. Amo que contigo soy feliz.</li>
+    <li>63. Amo cuando compartimos secretos.</li>
+    <li>64. Amo tu dulzura natural.</li>
+    <li>65. Amo cuando te ves tan linda jugando básquet.</li>
+    <li>66. Amo tu confianza.</li>
+    <li>67. Amo que siempre crees en mí.</li>
+    <li>68. Amo tu forma de vestir con tanto estilo.</li>
+    <li>69. Amo tu mirada con lentes, tan tierna.</li>
+    <li>70. Amo cuando nos reímos juntos.</li>
+    <li>71. Amo que eres mi paz.</li>
+    <li>72. Amo cuando sueñas despierta.</li>
+    <li>73. Amo que contigo todo es mejor.</li>
+    <li>74. Amo cuando me cuentas tus planes.</li>
+    <li>75. Amo tu voz cuando cantas.</li>
+    <li>76. Amo tu talento con la guitarra.</li>
+    <li>77. Amo cuando me haces sentir importante.</li>
+    <li>78. Amo que siempre tienes un consejo.</li>
+    <li>79. Amo tu humildad.</li>
+    <li>80. Amo cuando me inspiras con tus logros.</li>
+    <li>81. Amo que siempre das lo mejor de ti.</li>
+    <li>82. Amo cuando tus ojitos se iluminan de felicidad.</li>
+    <li>83. Amo tus silencios llenos de paz.</li>
+    <li>84. Amo tu forma de amar.</li>
+    <li>85. Amo cuando nos entendemos sin palabras.</li>
+    <li>86. Amo tu honestidad.</li>
+    <li>87. Amo tu ternura al dibujar.</li>
+    <li>88. Amo tu manera de escucharme.</li>
+    <li>89. Amo cuando haces todo con amor.</li>
+    <li>90. Amo tu magia especial.</li>
+    <li>91. Amo tu belleza única.</li>
+    <li>92. Amo cuando te esfuerzas por tus sueños.</li>
+    <li>93. Amo tu paciencia inmensa.</li>
+    <li>94. Amo que siempre estás para mí.</li>
+    <li>95. Amo tu mirada tan profunda.</li>
+    <li>96. Amo todo lo que eres.</li>
+    <li>97. Amo imaginar una vida a tu lado.</li>
+    <li>98. Amo que contigo soy mejor persona.</li>
+    <li>99. Amo que cada día me enamoro más.</li>
+    <li>100. Amo que eres mi Ericita, mi todo.💗 </li>
+  </ul>
+
+  <script>
+    function showMessage() {
+      document.getElementById('messageText').style.display = 'block';
+    }
+    function showReasons() {
+      document.getElementById('reasonsList').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
