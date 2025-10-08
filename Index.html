@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tecnologías de Servidores</title>
+<style>
+  body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background-color: #050913;
+    color: #e0f7ff;
+    overflow-x: hidden;
+  }
+
+  header {
+    background: linear-gradient(90deg, #001f3f, #0077ff);
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #00ffff;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px #00bfff;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  button {
+    background-color: #002a4d;
+    border: 2px solid #00bfff;
+    color: #00ffff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    text-shadow: 0 0 5px #00ffff;
+  }
+
+  button:hover {
+    background-color: #00bfff;
+    color: #001f3f;
+    box-shadow: 0 0 15px #00ffff;
+  }
+
+  .contenido {
+    display: none;
+    max-width: 950px;
+    margin: 30px auto;
+    background-color: #001a33;
+    padding: 25px;
+    border-radius: 25px;
+    box-shadow: 0 0 25px #0077ff;
+    animation: aparecer 0.6s ease-in-out;
+  }
+
+  @keyframes aparecer {
+    from {opacity: 0; transform: scale(0.97);}
+    to {opacity: 1; transform: scale(1);}
+  }
+
+  h2 {
+    color: #00ffff;
+    border-bottom: 2px solid #00bfff;
+    padding-bottom: 5px;
+  }
+
+  ul {
+    list-style: square;
+  }
+
+  a {
+    color: #00ffff;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Tecnologías de Servidores</h1>
+<h1>Bienvenidos a nuestra pagina web</h1>
+  <nav>
+    <button onclick="mostrar('http')">Servidores HTTP</button>
+    <button onclick="mostrar('lenguajes')">Lenguajes de Servidor</button>
+    <button onclick="mostrar('bd')">Sistemas Gestores de Bases de Datos</button>
+    <button onclick="mostrar('cliente')">Modelo Cliente Servidor</button>
+    <button onclick="mostrar('hardware')">Hardware Mínimo</button>
+    <button onclick="mostrar('mapa')">Mapa Conceptual</button>
+<button onclick="mostrar('infografia')">INFOGRAFIA</button>
+  </nav>
+</header>
+
+<!-- SERVIDORES HTTP -->
+<section id="http" class="contenido">
+  <h2>Servidores HTTP</h2>
+  <p><strong>Definición:</strong>El Protocolo de Transferencia de Hipertexto (HTTP) es el protocolo fundamental y la columna vertebral de la World Wide Web. Su propósito principal es definir cómo se formatean y transmiten los mensajes, y qué acciones deben tomar los navegadores web (clientes) y los servidores web en respuesta a varios comandos.</p>
+  <p><strong>Características:</strong></p>
+  <ul>
+    <li>Usa el protocolo HTTP o HTTPS para la comunicación, aunque existe una diferencia del certificado de seguridad entre ambos ya que cuenta con certificacion SSL.</li>
+    <li>Puede gestionar múltiples conexiones simultáneas.</li>
+    <li>Trabaja con métodos como GET, POST, PUT y DELETE.</li>
+    <li>Permite almacenar, redirigir y registrar solicitudes.</li>
+    <li>Puede integrarse con sistemas de seguridad SSL/TLS.</li>
+  </ul>
+  <p><strong>Ejemplos populares:</strong><li>Apache HTTP Server (comúnmente llamado solo Apache) es un software de servidor web de código abierto y multiplataforma, desarrollado y mantenido por la Apache Software Foundation.</li><li>Nginx (pronunciado engine-x) es un software de código abierto de alto rendimiento. Se originó como un servidor web diseñado para una gran velocidad y eficiencia, pero hoy en día es una herramienta multifunción esencial en la infraestructura web moderna.</li><li>LiteSpeed Web Server (LSWS) es un software de servidor web propietario (de licencia de pago, a diferencia de Apache o Nginx) conocido por su alto rendimiento y eficiencia, siendo un reemplazo directo y optimizado para Apache.</li><li>Microsoft Internet Information Services (IIS) es un servidor web robusto y un conjunto de servicios de Internet desarrollado y propiedad de Microsoft.</li></p>
+
+  <p><strong>Importancia:</strong> Son la base del funcionamiento de la web moderna, pues gestionan todas las comunicaciones entre usuarios y sitios web tambien radica en que son parte del pilar fundamental de la World Wide Web(W.W.W) y el principal medio para que los sitios web sean accesibles a internet gracias a una conexion</p>
+  <p><strong>Fuente:</strong> <a href="https://developer.mozilla.org/es/docs/Web/HTTP" target="_blank">MDN Web Docs</a></p>
+</section>
+
+<!-- LENGUAJES DE SERVIDOR -->
+<section id="lenguajes" class="contenido">
+  <h2>Lenguajes de Servidor</h2>
+  <p><strong>Definición:</strong>Los lenguajes de servidor, también conocidos como lenguajes de programación del lado del servidor o Backend, son lenguajes de programación que se ejecutan directamente en el servidor web antes de que el contenido sea enviado al navegador del usuario (cliente).
+Su función principal es gestionar la lógica de negocio de una aplicación web, interactuando con bases de datos y procesando la información para generar dinámicamente el código HTML, CSS y JavaScript que finalmente verá el usuario.</p>
+  <p><strong>Características:</strong></p>
+  <ul>
+    <li>Permiten la conexión con bases de datos.</li>
+    <li>Generan contenido HTML personalizado para cada usuario.</li>
+    <li>Manejan sesiones, cookies y autenticaciones.</li>
+    <li>Permiten realizar cálculos y validar formularios en el servidor.</li>
+    <li>Funcionan en conjunto con servidores HTTP como Apache o Nginx.</li>
+  </ul>
+  <p><strong>Ejemplos:</strong></p>
+  <ul>
+    <li><b>PHP:</b> Ampliamente usado en sitios como WordPress o Wikipedia.</li>
+    <li><b>Node.js:</b> Permite usar JavaScript del lado del servidor.</li>
+    <li><b>Python:</b> Frameworks como Django y Flask lo hacen popular en desarrollo web.</li>
+    <li><b>Java:</b> Usado en aplicaciones empresariales con frameworks como Spring.</li>
+  </ul>
+  <p><strong>Fuente:</strong> <a href="https://developer.mozilla.org/es/docs/Learn/Server-side/First_steps" target="_blank">GeeksForGeeks</a></p>
+</section>
+
+<!-- SISTEMAS GESTORES DE BASES DE DATOS -->
+<section id="bd" class="contenido">
+  <h2>Sistemas Gestores de Bases de Datos (SGBD)</h2>
+  <p><strong>Definición:</strong> Un Sistema Gestor de Bases de Datos (SGBD), conocido por sus siglas en inglés como DBMS (Database Management System), es un software especializado que actúa como interfaz entre la base de datos física (los datos almacenados) y los usuarios o las aplicaciones.
+Su propósito principal es facilitar la creación, manipulación, administración y mantenimiento de una base de datos de manera organizada, segura y eficiente.</p>
+  <p><strong>Características:</strong></p>
+  <ul>
+    <li>Usa el lenguaje SQL para realizar consultas.</li>
+    <li>Permite múltiples usuarios con distintos niveles de acceso.</li>
+    <li>Ofrece respaldo y recuperación ante fallos.</li>
+    <li>Garantiza la integridad y consistencia de los datos.</li>
+    <li>Puede ser relacional (SQL) o no relacional (NoSQL).</li>
+  </ul>
+  <p><strong>Ejemplos:</strong> MySQL, PostgreSQL, Oracle, Microsoft SQL Server, MongoDB.</p>
+  <p><strong>Importancia:</strong> Sin un gestor de bases de datos, los servidores no podrían manejar grandes cantidades de información de forma segura ni eficiente.</p>
+  <p><strong>Fuente:</strong> <a href="https://www.ibm.com/es-es/topics/dbms" target="_blank">IBM - DBMS</a></p>
+</section>
+
+<!-- MODELO CLIENTE SERVIDOR -->
+<section id="cliente" class="contenido">
+  <h2>Modelo Cliente Servidor</h2>
+  <p><strong>Definición:</strong> Es una arquitectura donde el cliente es el demandante y el servidor es el proveedor de los recursos que el cliente requiera, por lo general el cliente solicita algo en especifico el cual el proveedor (servidor) tiene que poner a disposicion</p>
+  <p><strong>Características:</strong></p>
+  <ul>
+    <li>Separación entre cliente (interfaz) y servidor (procesamiento).</li>
+    <li>Usa protocolos como HTTP, FTP, o TCP/IP para comunicarse.</li>
+    <li>Permite escalar el sistema con varios clientes y servidores.</li>
+    <li>El cliente puede ser un navegador, app móvil o programa.</li>
+<li>El servidor suele esperar la peticion del cliente aunque en algunas ocasiones el servidor ya la tiene preparada sin necesidad de generar el alto trafico de peticiones</li>
+  </ul>
+  <p><strong>Ejemplo práctico:</strong> Cuando visitas un sitio web, tu navegador (cliente) envía una solicitud al servidor, el cual procesa y devuelve la página.</p>
+  <p><strong>Fuente:</strong> <a href="https://www.cloudflare.com/es-es/learning/ddos/glossary/client-server-model/" target="_blank">Cloudflare</a></p>
+</section>
+
+<!-- HARDWARE MÍNIMO -->
+<section id="hardware" class="contenido">
+  <h2>Hardware Mínimo para un Servidor</h2>
+  <p><strong>Definición:</strong>Es todo lo minimo que necesita un servidor dependiendo la necesidad que tengas en lo que se requiera(ranuras de disco duro, memorias RAM, fuentes de poder 0 hardware esto quiere decir que es todo lo externo que se puede tocar para mejorar el rendimiento) </p>
+  <p><strong>Componentes esenciales:</strong></p>
+  <ul>
+    <li><b>Procesador (CPU):</b> Mínimo 4 núcleos (recomendado Xeon o Ryzen).</li>
+    <li><b>Memoria RAM:</b> Mínimo 8 GB (recomendado 16 GB o más).</li>
+    <li><b>Almacenamiento:</b> SSD de al menos 500 GB para velocidad óptima.</li>
+    <li><b>Fuente de poder:</b> De calidad con protección contra fallos eléctricos.</li>
+    <li><b>Conectividad:</b> Internet estable con IP fija y buen ancho de banda.</li>
+  </ul>
+  <p><strong>Fuente:</strong> <a href="https://www.hp.com/mx-es/shop/tech-takes/que-es-un-servidor" target="_blank">HP Tech Takes</a></p>
+</section>
+
+<!-- MAPA CONCEPTUAL -->
+<section id="mapa" class="contenido">
+  <h2>Mapa Conceptual</h2>
+  <img src="mapaconceptual.jpg" alt="Mapa conceptual ejemplo" style="max-width:100%; border-radius:30px; box-shadow:0 0 15px #00ffff;">
+</section>
+
+<!-- INFOGRAFIA -->
+<section id="infografia" class="contenido">
+  <h2>infografia</h2>
+  <p><strong>Definicion modelo cliente servidor:</strong>Es la estructura fundamental de las redes e internet donde las tareas se distribuyen entre proveedores de recursos(servidores) y solicitantes de los mismos(clientes)</p>
+  <ul>
+   <body>
+    <h2>Descripcion graficada en tabla</h2>
+    
+    <table border="1">
+        <!-- Primera fila -->
+        <tr>
+            <td>ROL</td>
+            <td>DEFINICION</td>
+        </tr>
+        <!-- Segunda fila -->
+        <tr>
+            <td>CLIENTE</td>
+            <td>Es el dispositivo o software que comienza un proceso de solicitud o servicio</td>
+        </tr>
+        <!-- Tercera fila -->
+        <tr>
+            <td>SERVIDOR</td>
+            <td>Es el software o hardware que responde a esa solicitud y proporciona los datos o recursos solicitados</td>
+        </tr>
+    </table>
+  <p><strong>Muestra grafica:</strong><div style="text-align:center; font-family:Arial;">
+  <div style="border:2px solid #0078d7; border-radius:10px; padding:10px; width:250px; margin:auto;">
+    <b>CLIENTE (A)</b>
+  </div>
+
+  <div style="font-size:30px; color:#0078d7;">⬇️</div>
+  <div><b>SOLICITUD</b> (Petición de recurso HTTP)</div>
+
+  <div style="margin-top:10px; border:2px solid #28a745; border-radius:10px; padding:10px; width:300px; margin:auto;">
+    <b>SERVIDOR (B)</b><br>
+    💾 <b>PROCESAMIENTO:</b> El CPU y la RAM procesan la solicitud y acceden a los datos
+  </div>
+
+  <div style="font-size:30px; color:#0078d7; margin-top:10px;">⬇️</div>
+  <div><b>RESPUESTA</b> (Envío de datos o página solicitada)</div>
+
+  <div style="margin-top:10px; border:2px solid #0078d7; border-radius:10px; padding:10px; width:250px; margin:auto;">
+    <b>CLIENTE (A)</b>
+  </div>
+</div></p>
+
+  <p><strong>COMPONENTES DEL HARDWARE EN UN SISTEMA OPERATIVO</strong> <div class="container">
+    <div class="component">
+        <div>
+    <p><strong>CPU:</strong> El cerebro del computador, procesa datos e instrucciones.</p>
+    <p><strong>RAM:</strong> Memoria temporal que ayuda al CPU a trabajar más rápido.</p>
+    <p><strong>Disco duro / SSD:</strong> Almacena archivos, programas y el sistema operativo.</p>
+    <p><strong>Placa base:</strong> Conecta todos los componentes y permite su comunicación.</p>
+    <p><strong>Fuente de poder:</strong> Suministra energía a todos los componentes.</p>
+    <p><strong>Tarjeta gráfica:</strong> Procesa imágenes y gráficos para mostrar en pantalla.</p>
+    <p><strong>Periféricos:</strong> Dispositivos externos para interactuar con la computadora.</p>
+    <p><strong>Almacenamiento extraíble:</strong> USB o discos externos para transportar o respaldar información.</p>
+</div>
+
+</p>
+  <p><strong>representacion grafica:</strong> <div class="hardware-container">
+<div style="display:flex; flex-wrap:wrap; gap:20px; justify-content:center; margin-top:20px;">
+    <div style="background-color:#1E1E1E; padding:20px; width:200px; border-radius:10px; text-align:center; color:#FFD700;">
+        <h3>PROCESADOR</h3>
+        <p>El cerebro del computador, procesa datos e instrucciones.</p>
+        <img src="cpu.jpg" alt="CPU" style="width:100px; margin-top:10px;">
+    </div>
+    <div style="background-color:#2C2C2C; padding:20px; width:200px; border-radius:10px; text-align:center; color:#87CEFA;">
+        <h3>RAM</h3>
+        <p>Memoria temporal que ayuda al CPU a trabajar más rápido.</p>
+        <img src="ram.jpg" alt="RAM" style="width:100px; margin-top:10px;">
+    </div>
+    <div style="background-color:#1F1F2E; padding:20px; width:200px; border-radius:10px; text-align:center; color:#90EE90;">
+        <h3>Disco duro / SSD</h3>
+        <p>Almacena archivos, programas y el sistema operativo.</p>
+        <img src="ssd.jpg" alt="Disco duro" style="width:100px; margin-top:10px;">
+    </div>
+    <div style="background-color:#2B1E3F; padding:20px; width:200px; border-radius:10px; text-align:center; color:#FFB6C1;">
+        <h3>Placa base</h3>
+        <p>Conecta todos los componentes y permite su comunicación.</p>
+        <img src="placamadre.jpg" alt="Placa base" style="width:100px; margin-top:10px;">
+    </div>
+    <div style="background-color:#3A1E1E; padding:20px; width:200px; border-radius:10px; text-align:center; color:#FFA07A;">
+        <h3>Fuente de poder</h3>
+        <p>Suministra energía a todos los componentes.</p>
+        <img src="psu.jpg" alt="Fuente de poder" style="width:100px; margin-top:10px;">
+    </div>
+    <div style="background-color:#2E1E3A; padding:20px; width:200px; border-radius:10px; text-align:center; color:#9370DB;">
+        <h3>Tarjeta gráfica</h3>
+        <p>Procesa imágenes y gráficos para mostrar en pantalla.</p>
+        <img src="gpu.jpg" alt="Tarjeta gráfica" style="width:100px; margin-top:10px;">
+    </div>
+    <div style="background-color:#1E2E2E; padding:20px; width:200px; border-radius:10px; text-align:center; color:#40E0D0;">
+        <h3>Periféricos</h3>
+        <p>Dispositivos externos para interactuar con la computadora.</p>
+        <img src="perifericos.jpg" alt="Periféricos" style="width:100px; margin-top:10px;">
+    </div>
+    <div style="background-color:#3A1E2E; padding:20px; width:200px; border-radius:10px; text-align:center; color:#FF6347;">
+        <h3>Almacenamiento extraíble</h3>
+        <p>USB o discos externos para transportar o respaldar información.</p>
+        <img src="usb.jpg" alt="Almacenamiento extraíble" style="width:100px; margin-top:10px;">
+    </div>
+</div>
+<div style="background-color:#1E1E2F; color:#FFFFFF; padding:20px; border-radius:10px; max-width:800px; margin:20px auto; font-family:Arial, sans-serif;">
+    <h2 style="text-align:center; color:#FFD700;">Bibliografía</h2>
+    <ol>
+        <li>
+            Wikipedia. <em>Hardware de computadora</em>. 
+            <a href="https://es.wikipedia.org/wiki/Hardware_de_computadora" target="_blank" style="color:#87CEFA;">https://es.wikipedia.org/wiki/Hardware_de_computadora</a>
+        </li>
+        <li>
+            GCFGlobal. <em>Componentes internos de una computadora</em>. 
+            <a href="https://edu.gcfglobal.org/es/computerbasics/inside-a-computer/1/" target="_blank" style="color:#87CEFA;">https://edu.gcfglobal.org/es/computerbasics/inside-a-computer/1/</a>
+        </li>
+        <li>
+            Wikipedia. <em>Placa base</em>. 
+            <a href="https://es.wikipedia.org/wiki/Placa_base" target="_blank" style="color:#87CEFA;">https://es.wikipedia.org/wiki/Placa_base</a>
+        </li>
+        <li>
+            Wikipedia. <em>Periférico (informática)</em>.  
+            <a href="https://es.wikipedia.org/wiki/Perif%C3%A9rico_(inform%C3%A1tica)" target="_blank" style="color:#87CEFA;">https://es.wikipedia.org/wiki/Perif%C3%A9rico_(inform%C3%A1tica)</a>
+        </li>
+        <li>
+            Arsys. <em>Arquitectura cliente-servidor: qué es, tipos y ejemplos</em>.  
+            <a href="https://www.arsys.es/blog/todo-sobre-la-arquitectura-cliente-servidor" target="_blank" style="color:#87CEFA;">https://www.arsys.es/blog/todo-sobre-la-arquitectura-cliente-servidor</a>
+        </li>
+    </ol>
+</div>
+
+</section>
+
+<script>
+  function mostrar(id) {
+    const secciones = document.querySelectorAll('.contenido');
+    secciones.forEach(sec => sec.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
