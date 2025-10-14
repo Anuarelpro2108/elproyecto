@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emprendimiento: Hot Dogs "El Sabor 🔥"</title>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(180deg, #ffeb99, #ffcc66);
+        color: #333;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    header {
+        background-color: #ff9933;
+        color: white;
+        padding: 20px;
+        font-size: 2rem;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 4px #00000055;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 30px auto;
+        background: #fff7e6;
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        animation: aparecer 1s ease-in-out;
+    }
+
+    @keyframes aparecer {
+        from {opacity: 0; transform: translateY(20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    .precio {
+        font-size: 2rem;
+        color: #ff6600;
+        font-weight: bold;
+        margin: 15px 0;
+    }
+
+    .img-hotdog {
+        width: 300px;
+        height: auto;
+        border-radius: 15px;
+        border: 3px solid #ff6600;
+        margin: 0 auto 20px;
+        display: block;
+    }
+
+    .dibujo {
+        margin: 30px auto;
+        width: 260px;
+        height: 100px;
+        position: relative;
+    }
+
+    .pan {
+        width: 260px;
+        height: 100px;
+        background: linear-gradient(to bottom, #f4c27f, #dca45d);
+        border-radius: 50px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .salchicha {
+        width: 200px;
+        height: 40px;
+        background: linear-gradient(to right, #c54b2c, #a9391e);
+        border-radius: 40px;
+        position: absolute;
+        top: 30px;
+        left: 30px;
+    }
+
+    .mostaza {
+        width: 180px;
+        height: 10px;
+        background: yellow;
+        border-radius: 5px;
+        position: absolute;
+        top: 45px;
+        left: 40px;
+        transform: rotate(-3deg);
+    }
+
+    footer {
+        margin-top: 40px;
+        padding: 20px;
+        background-color: #ff9933;
+        color: white;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+
+    a.boton {
+        display: inline-block;
+        background: #ff6600;
+        color: white;
+        font-size: 1.1rem;
+        padding: 12px 25px;
+        border-radius: 10px;
+        text-decoration: none;
+        margin: 10px;
+        transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    a.boton:hover {
+        background: #e25500;
+        transform: scale(1.05);
+    }
+</style>
+</head>
+<body>
+
+<header>
+    🌭 Emprendimiento: Hot Dogs "El Sabor 🔥"
+</header>
+
+<div class="container">
+    <h2>¡El Hot Dog más sabroso y económico de la ciudad!</h2>
+    <p>Disfruta un hot dog preparado con pan artesanal, salchicha de calidad y los mejores toppings que harán que vuelvas por más 😋</p>
+
+    <div class="precio">💰 Precio: $25 MXN</div>
+
+    <!-- Imagen -->
+    <img src="imagenhotdog.jpg" alt="Hot Dog delicioso" class="img-hotdog">
+
+    <!-- Dibujo -->
+    <div class="dibujo">
+        <div class="pan"></div>
+        <div class="salchicha"></div>
+        <div class="mostaza"></div>
+    </div>
+
+    <p>¡Apóyanos en nuestro proyecto de emprendimiento! Tu compra nos ayuda a seguir creciendo y ofrecerte el mejor sabor 🌭✨</p>
+
+    <!-- Botón para WhatsApp -->
+    <a href="whatsapp://send?phone=+522463301572&text=¡Hola!%20Quiero%20hacer%20un%20pedido%20de%20Hot%20Dogs%20🌭🔥"
+       class="boton">
+       📲 Hacer pedido por WhatsApp
+    </a>
+
+    <!-- Botón para llamada telefónica -->
+    <a href="tel:+522463301572" class="boton">
+       ☎️ Llamar para hacer pedido
+    </a>
+</div>
+<!-- Sección de productos -->
+<section style="margin: 40px auto; max-width: 1000px; text-align: center;">
+    <h2 style="color:#ff6600;">🍔 Nuestros Productos</h2>
+    <p>Prueba todas nuestras deliciosas opciones y elige tu favorita 😋</p>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-top: 25px;">
+
+        <!-- Producto 1 -->
+        <div style="background:#fff7e6; border-radius:15px; width:220px; padding:15px; box-shadow:0 4px 10px rgba(0,0,0,0.2);">
+            <img src="hotdogclasico.jpg" alt="Hot Dog Clásico" style="width:100%; border-radius:10px;">
+            <h3>Hot Dog Clásico 🌭</h3>
+            <p>Pan suave, salchicha premium y mostaza especial.</p>
+            <strong>💰 $25 MXN</strong>
+        </div>
+
+        <!-- Producto 2 -->
+        <div style="background:#fff7e6; border-radius:15px; width:220px; padding:15px; box-shadow:0 4px 10px rgba(0,0,0,0.2);">
+            <img src="hotdogespecial.jpg" alt="Hot Dog Especial" style="width:100%; border-radius:10px;">
+            <h3>Hot Dog aburrido😴</h3>
+            <p>Con tocino, queso fundido y jalapeños.</p>
+            <strong>💰 $25 MXN</strong>
+        </div>
+
+        <!-- Producto 3 -->
+        <div style="background:#fff7e6; border-radius:15px; width:220px; padding:15px; box-shadow:0 4px 10px rgba(0,0,0,0.2);">
+            <img src="hotdogdoble.jpg" alt="Hot Dog Doble" style="width:100%; border-radius:10px;">
+            <h3>Hot Dog con todo</h3>
+            <p>Doble salchicha, doble sabor, pura potencia.</p>
+            <strong>💰 $25 MXN</strong>
+        </div>
+
+        <!-- Producto 4 -->
+        <div style="background:#fff7e6; border-radius:15px; width:220px; padding:15px; box-shadow:0 4px 10px rgba(0,0,0,0.2);">
+            <img src="papasrefresco.jpg" alt="Combo Papas y Refresco" style="width:100%; border-radius:10px;">
+            <h3>hotdog solo con chile y catsup</h3>
+            <p>Complementa tu hot dog con papas y bebida.</p>
+            <strong>💰 $25 MXN</strong>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    © 2025 Emprendimiento "El Sabor 🔥" - Todos los derechos reservados.
+</footer>
+
+</body>
+</html>
