@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Trabajo PAEC - Herbolario Interactivo</title>
+  <style>
+    :root{
+      --green-1: #a8e063;
+      --green-2: #56ab2f;
+      --dark-green: #1e5631;
+      --panel-bg: #f5fff0;
+      --card-bg: #e8f5e9;
+      --text: #1b3d0f;
+      --accent: #4caf50;
+    }
+    *{box-sizing:border-box}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(180deg, var(--green-1), var(--green-2));
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow-x: hidden;
+      animation: aparecer 600ms ease-in-out;
+    }
+    @keyframes aparecer { from {opacity:0; transform:translateY(10px)} to {opacity:1; transform:none} }
+
+    header {
+      background-color: var(--dark-green);
+      color: #fff;
+      padding: 22px 16px;
+      font-size: 1.9em;
+      font-weight: 700;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 0 16px 60px 16px;
+    }
+
+    .integrantes {
+      margin: 18px auto;
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 12px;
+      width: 100%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    }
+    .integrantes h2 { color: var(--dark-green); margin: 6px 0; }
+    .integrantes p { margin: 4px 0; font-weight:600; }
+
+    /* NAV / botones */
+    .menu {
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      margin: 18px 0;
+      flex-wrap:wrap;
+    }
+    .menu button, .auth-btn {
+      background-color: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 26px;
+      font-size: 1em;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 220ms, transform 120ms;
+    }
+    .menu button:hover, .auth-btn:hover { transform: scale(1.03); background-color:#388e3c; }
+    .menu button:active { transform: scale(.98); }
+
+    /* Sections */
+    section {
+      display: none;
+      margin: 16px auto;
+      width: 100%;
+      background-color: var(--panel-bg);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.16);
+      text-align: left;
+      font-size: 1.05em;
+      animation: fadeIn 360ms ease-in-out;
+    }
+    section.active { display:block; }
+    @keyframes fadeIn { from {opacity:0; transform:translateY(20px)} to {opacity:1; transform:none} }
+
+    section img {
+      width: 220px;
+      height: 220px;
+      object-fit:cover;
+      border-radius: 12px;
+      display:block;
+      margin: 10px auto;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.18);
+      transition: transform .25s;
+    }
+    section img:hover { transform: scale(1.03); }
+
+    /* Auth panel */
+    .auth-panel {
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:flex-start;
+    }
+    .auth-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      width: 320px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      text-align:left;
+    }
+    .auth-card h3 { margin-top:0; color:var(--dark-green); }
+    .auth-card label { display:block; margin:8px 0 4px; font-weight:600; }
+    .auth-card input {
+      width:100%;
+      padding:8px 10px;
+      border-radius:8px;
+      border:1px solid #ddd;
+      font-size:1em;
+    }
+    .auth-card .small { font-size:0.9em; color:#555; margin-top:8px; }
+
+    /* Panel principal (búsqueda) */
+    .panel {
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:18px;
+      align-items:start;
+    }
+    .search-box {
+      background:#fff;
+      padding:14px;
+      border-radius:12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    .search-box input {
+      width:100%;
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid #ccc;
+      font-size:1em;
+      margin-bottom:8px;
+    }
+    .suggestions {
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .suggestion {
+      padding:8px 10px;
+      border-radius:8px;
+      background:#f1f8f1;
+      cursor:pointer;
+      border:1px solid #e2f2e2;
+    }
+    .suggestion:hover { background:#e8f5e9; transform:translateX(6px); }
+
+    .plant-card {
+      background:#fff;
+      border-radius:12px;
+      padding:12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+    }
+    .plant-card h3 { margin-top:0; color:var(--dark-green); }
+    .plant-data { margin:8px 0; line-height:1.4; }
+
+    /* Responsive */
+    @media (max-width:900px){
+      .panel { grid-template-columns: 1fr; }
+      .auth-card { width: 100%; }
+    }
+
+    footer{
+      background:var(--dark-green);
+      color:white;
+      padding:14px 10px;
+      margin-top:22px;
+      border-radius:10px;
+      font-size:0.95em;
+    }
+
+    .topbar {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    .welcome { font-weight:700; color:#08320a; }
+    .logout { background:#e53935; border-radius:10px; padding:8px 12px; color:white; border:none; cursor:pointer; }
+    .logout:hover { transform:scale(1.02) }
+  </style>
+</head>
+<body>
+  <header>Trabajo PAEC - Herbolario Interactivo</header>
+
+  <div class="container">
+    <div class="integrantes">
+      <h2>Integrantes</h2>
+      <p>Alexander Uziel Hernández Rosas</p>
+      <p>Oliver Alejandro Pintor Teloxa</p>
+      <p>Eliseo García Chumacero</p>
+      <p>Anuar Yael Cadena Lima</p>
+    </div>
+
+    <div class="menu" id="mainMenu">
+      <button onclick="irPanel()">🔎 Panel de plantas</button>
+      <button onclick="mostrarSeccion('r')">♻️ Importancia de las 3R</button>
+      <button onclick="mostrarSeccion('basura')">🗑️ Clasificación de la Basura</button>
+    </div>
+
+    <!-- SECCIÓN: Registro / Login -->
+    <section id="authSection" class="active">
+      <div class="topbar" style="margin-bottom:12px;">
+        <div style="text-align:left;">
+          <h2 style="margin:0;color:var(--dark-green)">Registro e Inicio de sesión</h2>
+          <p class="small" style="margin:6px 0 0;">Regístrate o inicia sesión para acceder al panel interactivo de plantas.</p>
+        </div>
+        <div style="text-align:right;">
+          <span id="currentUserDisplay" style="display:none" class="welcome"></span>
+          <button id="btnLogout" class="logout" style="display:none" onclick="logout()">Cerrar sesión</button>
+        </div>
+      </div>
+
+      <div class="auth-panel">
+        <div class="auth-card">
+          <h3>Registrarse</h3>
+          <label for="regName">Nombre completo</label>
+          <input id="regName" type="text" placeholder="Tu nombre" />
+          <label for="regEmail">Correo</label>
+          <input id="regEmail" type="email" placeholder="ejemplo@correo.com" />
+          <label for="regPass">Contraseña</label>
+          <input id="regPass" type="password" placeholder="mínimo 6 caracteres" />
+          <div style="margin-top:12px; display:flex; gap:8px;">
+            <button class="auth-btn" onclick="registerUser()">Registrarse</button>
+            <button class="auth-btn" onclick="prefillLogin()">Usar datos de prueba</button>
+          </div>
+          <p class="small">Los datos se guardan localmente en tu navegador (demo). Para producción necesitarás backend.</p>
+        </div>
+
+        <div class="auth-card">
+          <h3>Iniciar sesión</h3>
+          <label for="logEmail">Correo</label>
+          <input id="logEmail" type="email" placeholder="ejemplo@correo.com" />
+          <label for="logPass">Contraseña</label>
+          <input id="logPass" type="password" placeholder="tu contraseña" />
+          <div style="margin-top:12px;">
+            <button class="auth-btn" onclick="loginUser()">Iniciar sesión</button>
+          </div>
+          <p class="small">Si ya te registraste, usa el mismo correo y contraseña.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: Panel de búsqueda -->
+    <section id="panelSection">
+      <div class="topbar" style="margin-bottom:8px;">
+        <div style="text-align:left;">
+          <h2 style="margin:0;color:var(--dark-green)">Panel de búsqueda de plantas</h2>
+          <p class="small" style="margin:6px 0 0;">Busca por nombre común y selecciona para ver información detallada.</p>
+        </div>
+        <div style="text-align:right;">
+          <span id="currentUserPanel" class="welcome"></span>
+          <button id="logoutPanelBtn" class="logout" onclick="logout()">Cerrar sesión</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <!-- izquierda: búsqueda y resultados -->
+        <div class="search-box">
+          <input id="searchInput" type="text" placeholder="Escribe el nombre común (ej: Aloe, Manzanilla...)" oninput="onSearchInput()" />
+          <div id="suggestions" class="suggestions"></div>
+
+          <div style="margin-top:12px;">
+            <h4 style="margin-bottom:6px;color:var(--dark-green)">Plantas disponibles</h4>
+            <div id="plantList" class="suggestions"></div>
+          </div>
+        </div>
+
+        <!-- derecha: tarjeta de información -->
+        <div class="plant-card" id="plantInfoCard">
+          <h3>Información de la planta</h3>
+          <img id="plantImg" src="images/placeholder.jpg" alt="Imagen de planta" />
+          <div id="plantDetails" class="plant-data">
+            <p><strong>Nombre común:</strong> <span id="pNombre">-</span></p>
+            <p><strong>Nombre científico:</strong> <span id="pCientifico">-</span></p>
+            <p><strong>Usos / Beneficios:</strong> <span id="pUsos">-</span></p>
+            <p><strong>Cuidados:</strong> <span id="pCuidados">-</span></p>
+            <p><strong>Hábitat:</strong> <span id="pHabitat">-</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: Importancia 3R -->
+    <section id="r">
+      <h2>Importancia de las 3R (Reducir, Reutilizar, Reciclar)</h2>
+      <img src="reciclaje.gif" alt="Símbolo de reciclaje" />
+      <p>Las 3R son una estrategia fundamental para la conservación del medio ambiente. Su objetivo es disminuir la cantidad de residuos que generamos, reducir el consumo de recursos naturales y fomentar una cultura de sostenibilidad.</p>
+      <p><strong>Reducir:</strong> consumir menos y de manera responsable, evitando productos desechables o con empaques innecesarios.</p>
+      <p><strong>Reutilizar:</strong> darle una segunda vida a los objetos, extendiendo su uso y evitando que se conviertan en basura.</p>
+      <p><strong>Reciclar:</strong> transformar los desechos en nuevos productos mediante separación y procesamiento de materiales.</p>
+      <p><strong>Beneficios de aplicar las 3R:</strong></p>
+      <ul>
+        <li>Protege el medio ambiente.</li>
+        <li>Reduce la contaminación de suelo, agua y aire.</li>
+        <li>Ahorrar recursos naturales y energía.</li>
+        <li>Genera conciencia y hábitos de consumo responsable.</li>
+      </ul>
+      <p><strong>Consecuencias si no se aplican:</strong></p>
+      <ul>
+        <li>Acumulación de basura en calles, ríos y mares.</li>
+        <li>Contaminación del suelo, agua y aire.</li>
+        <li>Pérdida de biodiversidad y hábitats naturales.</li>
+        <li>Agotamiento de recursos naturales y mayor consumo energético.</li>
+      </ul>
+    </section>
+
+    <!-- SECCIÓN: Clasificación de la Basura -->
+    <section id="basura">
+      <h2>Clasificación de la Basura</h2>
+      <img src="residuos.gif" alt="Clasificación de residuos" />
+      <p>Clasificar correctamente los residuos es esencial para mantener la limpieza, facilitar el reciclaje y evitar la contaminación del suelo, agua y aire.</p>
+      <p>Los tipos principales de basura son:</p>
+      <ul>
+        <li><strong>Orgánica:</strong> restos de alimentos, hojas, cáscaras y materiales biodegradables. Se puede convertir en composta para enriquecer el suelo.</li>
+        <li><strong>Inorgánica:</strong> plásticos, metales, vidrios y otros materiales no biodegradables que pueden reciclarse si se separan correctamente.</li>
+        <li><strong>Peligrosa:</strong> desechos con sustancias tóxicas o contaminantes, como pilas, aceites, medicamentos o electrónicos. Deben manejarse en centros especializados.</li>
+        <li><strong>Residuos sanitarios:</strong> pañales, toallas sanitarias o cubrebocas, los cuales deben desecharse adecuadamente para evitar riesgos a la salud.</li>
+      </ul>
+      <p>Separar la basura desde el origen facilita su reciclaje, reduce los costos de limpieza y contribuye al equilibrio ambiental. Además, fomenta una cultura ecológica y solidaria con nuestro entorno.</p>
+    </section>
+
+    <footer>
+      Proyecto PAEC 2025 | CECyTE | Fomentando la conciencia ecológica 🌎
+    </footer>
+  </div>
+
+  <script>
+    /*********
+     * Datos de ejemplo de plantas
+     * Reemplaza image filenames con tus imágenes en /images/
+     *********/
+   const PLANTS = [
+  {
+    common: "Manzanilla",
+    scientific: "Matricaria chamomilla",
+    uses: "Antiinflamatoria, calmante digestiva, infusiones para cólicos y relajación.",
+    cuidados: "Luz solar directa parcial, riego moderado, suelo bien drenado.",
+    habitat: "Zonas templadas, campos y jardines.",
+    img: "manzanilla.jpg"
+  },
+  {
+    common: "Aloe Vera",
+    scientific: "Aloe barbadensis miller",
+    uses: "Cicatrización, hidratación de piel, gel para quemaduras leves y uso tópico.",
+    cuidados: "Luz directa o parcial, riegos esporádicos, sustrato arenoso.",
+    habitat: "Climas cálidos y secos, macetas y jardines.",
+    img: "aloevera.jpg"
+  },
+  {
+    common: "Lavanda",
+    scientific: "Lavandula angustifolia",
+    uses: "Relajante, aromaterapia, repelente natural de insectos, aceites esenciales.",
+    cuidados: "Sol pleno, poco riego, suelo con buen drenaje.",
+    habitat: "Zonas secas y soleadas.",
+    img: "lavanda.jpg"
+  },
+  {
+    common: "Menta",
+    scientific: "Mentha × piperita",
+    uses: "Digestiva, para infusiones, aroma y condimento en cocina.",
+    cuidados: "Sombra parcial a sol, riego regular, puede invadir el jardín (control).",
+    habitat: "Zonas húmedas y jardines caseros.",
+    img: "menta.jpg"
+  },
+  {
+    common: "Ruda",
+    scientific: "Ruta graveolens",
+    uses: "Tradicionalmente usada como repelente, en pequeñas dosis tópicas (consultar uso).",
+    cuidados: "Luz solar, riego moderado, resistente.",
+    habitat: "Jardines y zonas templadas.",
+    img: "ruda.jpg"
+  },
+  {
+    common: "Albahaca",
+    scientific: "Ocimum basilicum",
+    uses: "Culinaria, aromática y medicinal ligera.",
+    cuidados: "Luz directa, riego moderado, suelo fértil.",
+    habitat: "Macetas y jardines soleados.",
+    img: "albahaca.jpg"
+  },
+  {
+    common: "Bugambilia",
+    scientific: "Bougainvillea spectabilis",
+    uses: "Decorativa, flores ornamentales.",
+    cuidados: "Sol pleno, riego moderado, poda regular.",
+    habitat: "Climas cálidos y soleados.",
+    img: "bugambilia.jpg"
+  },
+  {
+    common: "Geranio",
+    scientific: "Pelargonium spp.",
+    uses: "Decorativa, repelente natural ligero.",
+    cuidados: "Luz directa parcial, riego moderado, suelo bien drenado.",
+    habitat: "Macetas y jardines.",
+    img: "geranio.jpg"
+  },
+  {
+    common: "Rosa de Castilla",
+    scientific: "Rosa gallica",
+    uses: "Decorativa, aromática, uso en infusiones.",
+    cuidados: "Luz directa, riego frecuente, poda anual.",
+    habitat: "Jardines templados.",
+    img: "rosa_de_castilla.jpg"
+  },
+  {
+    common: "Hierba Buena",
+    scientific: "Mentha spicata",
+    uses: "Digestiva, aromática y culinaria.",
+    cuidados: "Luz parcial, riego regular, puede expandirse rápidamente.",
+    habitat: "Jardines y huertos caseros.",
+    img: "hierba_buena.jpg"
+  },
+  {
+    common: "Citronela",
+    scientific: "Cymbopogon nardus",
+    uses: "Repelente natural de insectos, aceites esenciales.",
+    cuidados: "Sol pleno, riego moderado, suelo bien drenado.",
+    habitat: "Climas cálidos, jardines y macetas.",
+    img: "citronela.jpg"
+  },
+  {
+    common: "Vaporru",
+    scientific: "vaporaria",
+    uses: "Tradicional / medicinal local (información limitada).",
+    cuidados: "Luz solar parcial, riego moderado.",
+    habitat: "Zonas locales según disponibilidad.",
+    img: "vaporru.jpg"
+  },
+  {
+    common: "Lengua de suegra",
+    scientific: "Sansevieria trifasciata",
+    uses: "Purifica el aire, ornamental.",
+    cuidados: "Luz indirecta, riego escaso, resistente.",
+    habitat: "Interior y exterior protegido.",
+    img: "lenguadesuegra.jpg"
+  },
+  {
+    common: "Sábila",
+    scientific: "Aloe vera",
+    uses: "Cicatrizante, hidratante, uso medicinal y tópico.",
+    cuidados: "Sol directo o parcial, riego escaso, suelo arenoso.",
+    habitat: "Climas cálidos y secos.",
+    img: "sabila.jpg"
+  },
+  {
+    common: "Romero",
+    scientific: "Rosmarinus officinalis",
+    uses: "Culinaria, aromática, medicinal ligera.",
+    cuidados: "Sol pleno, riego moderado, suelo bien drenado.",
+    habitat: "Zonas templadas y jardines soleados.",
+    img: "romero.jpg"
+  }
+];
+
+    // ---------- Helper: mostrar / ocultar secciones ----------
+    function mostrarSeccion(id) {
+      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+      const s = document.getElementById(id);
+      if (s) s.classList.add('active');
+      // scroll to top of container when switching
+      window.scrollTo({top: 0, behavior:'smooth'});
+    }
+
+    // Inicial: mostrar authSection
+    mostrarSeccion('authSection');
+
+    // ---------- Gestión simple de usuarios (localStorage, DEMO) ----------
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('paec_users') || '{}');
+    }
+    function saveUsers(u) {
+      localStorage.setItem('paec_users', JSON.stringify(u));
+    }
+
+    function registerUser() {
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim().toLowerCase();
+      const pass = document.getElementById('regPass').value;
+
+      if (!name || !email || pass.length < 6) {
+        alert('Completa todos los campos y usa contraseña de al menos 6 caracteres.');
+        return;
+      }
+
+      const users = getUsers();
+      if (users[email]) {
+        alert('Ya existe una cuenta con ese correo. Intenta iniciar sesión.');
+        return;
+      }
+
+      users[email] = { name, pass };
+      saveUsers(users);
+      // iniciar sesión automáticamente
+      localStorage.setItem('paec_current', email);
+      updateUIForUser();
+      irPanel();
+    }
+
+    function loginUser() {
+      const email = document.getElementById('logEmail').value.trim().toLowerCase();
+      const pass = document.getElementById('logPass').value;
+      const users = getUsers();
+      if (!users[email] || users[email].pass !== pass) {
+        alert('Correo o contraseña incorrectos.');
+        return;
+      }
+      localStorage.setItem('paec_current', email);
+      updateUIForUser();
+      irPanel();
+    }
+
+    function logout() {
+      localStorage.removeItem('paec_current');
+      updateUIForUser();
+      mostrarSeccion('authSection');
+    }
+
+    function updateUIForUser() {
+      const cur = localStorage.getItem('paec_current');
+      const btnLogout = document.getElementById('btnLogout');
+      const currentUserDisplay = document.getElementById('currentUserDisplay');
+      const currentUserPanel = document.getElementById('currentUserPanel');
+      const logoutPanelBtn = document.getElementById('logoutPanelBtn');
+
+      if (cur) {
+        const users = getUsers();
+        const name = (users[cur] && users[cur].name) ? users[cur].name : cur;
+        currentUserDisplay.textContent = 'Sesión: ' + name;
+        currentUserDisplay.style.display = 'inline-block';
+        btnLogout.style.display = 'inline-block';
+        currentUserPanel.textContent = 'Bienvenido, ' + name;
+        logoutPanelBtn.style.display = 'inline-block';
+      } else {
+        currentUserDisplay.style.display = 'none';
+        btnLogout.style.display = 'none';
+        currentUserPanel.textContent = '';
+        logoutPanelBtn.style.display = 'none';
+      }
+    }
+
+    // Prefill demo user for rapidez
+    function prefillLogin() {
+      const demo = { name: 'Visitante Demo', pass: '123456', email: 'demo@demo.com' };
+      const users = getUsers();
+      users[demo.email] = { name: demo.name, pass: demo.pass };
+      saveUsers(users);
+      document.getElementById('logEmail').value = demo.email;
+      document.getElementById('logPass').value = demo.pass;
+      alert('Usuario demo creado. Haz click en "Iniciar sesión".');
+    }
+
+    // ---------- Panel y búsqueda de plantas ----------
+    function irPanel() {
+      const cur = localStorage.getItem('paec_current');
+      if (!cur) {
+        alert('Debes registrarte o iniciar sesión para acceder al panel.');
+        mostrarSeccion('authSection');
+        return;
+      }
+      // mostrar panel
+      mostrarSeccion('panelSection');
+      renderPlantList();
+      updateUIForUser();
+      clearPlantInfo();
+    }
+
+    function renderPlantList() {
+      const plantList = document.getElementById('plantList');
+      plantList.innerHTML = '';
+      PLANTS.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'suggestion';
+        div.textContent = p.common;
+        div.onclick = () => selectPlant(p.common);
+        plantList.appendChild(div);
+      });
+    }
+
+    // buscar por input
+    function onSearchInput() {
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+      const suggestions = document.getElementById('suggestions');
+      suggestions.innerHTML = '';
+      if (!q) return;
+      const matches = PLANTS.filter(p => p.common.toLowerCase().includes(q));
+      if (matches.length === 0) {
+        const no = document.createElement('div');
+        no.className = 'suggestion';
+        no.textContent = 'No se encontraron resultados';
+        suggestions.appendChild(no);
+        return;
+      }
+      matches.forEach(m => {
+        const d = document.createElement('div');
+        d.className = 'suggestion';
+        d.textContent = m.common;
+        d.onclick = () => selectPlant(m.common);
+        suggestions.appendChild(d);
+      });
+    }
+
+    // seleccionar planta por nombre común
+    function selectPlant(commonName) {
+      const p = PLANTS.find(x => x.common.toLowerCase() === commonName.toLowerCase());
+      if (!p) {
+        alert('Planta no encontrada.');
+        return;
+      }
+      // mostrar en tarjeta derecha
+      document.getElementById('pNombre').textContent = p.common;
+      document.getElementById('pCientifico').textContent = p.scientific;
+      document.getElementById('pUsos').textContent = p.uses;
+      document.getElementById('pCuidados').textContent = p.cuidados;
+      document.getElementById('pHabitat').textContent = p.habitat;
+
+      const img = document.getElementById('plantImg');
+      img.src = p.img;
+      img.alt = p.common;
+
+      // opcional: llevar al card (movimiento suave)
+      document.getElementById('plantInfoCard').scrollIntoView({behavior:'smooth'});
+    }
+
+    function clearPlantInfo() {
+      document.getElementById('pNombre').textContent = '-';
+      document.getElementById('pCientifico').textContent = '-';
+      document.getElementById('pUsos').textContent = '-';
+      document.getElementById('pCuidados').textContent = '-';
+      document.getElementById('pHabitat').textContent = '-';
+      document.getElementById('plantImg').src = 'images/placeholder.jpg';
+      document.getElementById('plantImg').alt = 'Imagen de planta';
+      document.getElementById('searchInput').value = '';
+      document.getElementById('suggestions').innerHTML = '';
+    }
+
+    // al cargar la página, ajustar UI según sesión
+    window.addEventListener('load', () => {
+      updateUIForUser();
+      // Si el usuario ya estaba loggeado, mostrar panel
+      if (localStorage.getItem('paec_current')) {
+        // mostrar panel automáticamente
+        // comentar la siguiente línea si prefieres que vaya a authSection al recargar
+        irPanel();
+      } else {
+        mostrarSeccion('authSection');
+      }
+    });
+  </script>
+</body>
+</html><html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trabajo PAEC</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(180deg, #a8e063, #56ab2f);
+      color: #1b3d0f;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #1e5631;
+      color: #fff;
+      padding: 25px;
+      font-size: 2.2em;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    .integrantes {
+      margin: 20px auto;
+      background: #e8f5e9;
+      border-radius: 10px;
+      padding: 15px;
+      width: 80%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .integrantes h2 {
+      color: #1e5631;
+    }
+    .menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .menu button {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.1em;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.4s, transform 0.2s;
+      width: 60%;
+    }
+    .menu button:hover {
+      background-color: #388e3c;
+      transform: scale(1.05);
+    }
+    section {
+      display: none;
+      margin: 40px auto;
+      width: 85%;
+      background-color: #f5fff0;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+      text-align: justify;
+      font-size: 1.1em;
+      animation: fadeIn 1s ease-in-out;
+    }
+    section img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+      margin: 15px auto;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease-in-out;
+    }
+    section img:hover {
+      transform: scale(1.05);
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(50px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <header>Trabajo PAEC</header>
+  <div class="integrantes">
+    <h2>Integrantes</h2>
+    <p>Alexander Uziel Hernández Rosas</p>
+    <p>Oliver Alejandro Pintor Teloxa</p>
+    <p>Eliseo García Chumacero</p>
+    <p>Anuar Yael Cadena Lima</p>
+  </div>
+
+  <div class="menu">
+    <button onclick="mostrarSeccion('r')">Importancia de las 3R</button>
+    <button onclick="mostrarSeccion('basura')">Clasificación de la Basura</button>
+  </div>
+
+  <section id="r">
+    <h2>Importancia de las 3R (Reducir, Reutilizar, Reciclar)</h2>
+    <img src="reciclaje.gif" alt="Símbolo de reciclaje">
+    <p>Las 3R son una estrategia fundamental para la conservación del medio ambiente. Su objetivo es disminuir la cantidad de residuos que generamos, reducir el consumo de recursos naturales y fomentar una cultura de sostenibilidad.</p>
+    <p><strong>Reducir:</strong> consumir menos y de manera responsable, evitando productos desechables o con empaques innecesarios.</p>
+    <p><strong>Reutilizar:</strong> darle una segunda vida a los objetos, extendiendo su uso y evitando que se conviertan en basura.</p>
+    <p><strong>Reciclar:</strong> transformar los desechos en nuevos productos mediante separación y procesamiento de materiales.</p>
+    <p><strong>Beneficios de aplicar las 3R:</strong></p>
+    <ul>
+      <li>Protege el medio ambiente.</li>
+      <li>Reduce la contaminación de suelo, agua y aire.</li>
+      <li>Ahorrar recursos naturales y energía.</li>
+      <li>Genera conciencia y hábitos de consumo responsable.</li>
+    </ul>
+    <p><strong>Consecuencias si no se aplican:</strong></p>
+    <ul>
+      <li>Acumulación de basura en calles, ríos y mares.</li>
+      <li>Contaminación del suelo, agua y aire.</li>
+      <li>Pérdida de biodiversidad y hábitats naturales.</li>
+      <li>Agotamiento de recursos naturales y mayor consumo energético.</li>
+    </ul>
+  </section>
+
+  <section id="basura">
+    <h2>Clasificación de la Basura</h2>
+    <img src="residuos.gif" alt="Clasificación de residuos">
+    <p>Clasificar correctamente los residuos es esencial para mantener la limpieza, facilitar el reciclaje y evitar la contaminación del suelo, agua y aire.</p>
+    <p>Los tipos principales de basura son:</p>
+    <ul>
+      <li><strong>Orgánica:</strong> restos de alimentos, hojas, cáscaras y materiales biodegradables. Se puede convertir en composta para enriquecer el suelo.</li>
+      <li><strong>Inorgánica:</strong> plásticos, metales, vidrios y otros materiales no biodegradables que pueden reciclarse si se separan correctamente.</li>
+      <li><strong>Peligrosa:</strong> desechos con sustancias tóxicas o contaminantes, como pilas, aceites, medicamentos o electrónicos. Deben manejarse en centros especializados.</li>
+      <li><strong>Residuos sanitarios:</strong> pañales, toallas sanitarias o cubrebocas, los cuales deben desecharse adecuadamente para evitar riesgos a la salud.</li>
+    </ul>
+    <p>Separar la basura desde el origen facilita su reciclaje, reduce los costos de limpieza y contribuye al equilibrio ambiental. Además, fomenta una cultura ecológica y solidaria con nuestro entorno.</p>
+  </section>
+
+  <script>
+    function mostrarSeccion(id) {
+      document.querySelectorAll('section').forEach(s => s.style.display = 'none');
+      const sec = document.getElementById(id);
+      sec.style.display = 'block';
+      sec.style.animation = 'fadeIn 1s ease-in-out';
+    }
+  </script>
+</body>
+</html>
