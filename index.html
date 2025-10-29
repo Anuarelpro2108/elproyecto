@@ -214,8 +214,6 @@
 
     <div class="menu" id="mainMenu">
       <button onclick="irPanel()">🔎 Panel de plantas</button>
-      <button onclick="mostrarSeccion('r')">♻️ Importancia de las 3R</button>
-      <button onclick="mostrarSeccion('basura')">🗑️ Clasificación de la Basura</button>
     </div>
 
     <!-- SECCIÓN: Registro / Login -->
@@ -296,49 +294,16 @@
             <p><strong>Usos / Beneficios:</strong> <span id="pUsos">-</span></p>
             <p><strong>Cuidados:</strong> <span id="pCuidados">-</span></p>
             <p><strong>Hábitat:</strong> <span id="pHabitat">-</span></p>
+<p><strong>Reducir:</strong> <span id="preducir"></span></p>
+<p><strong>Reutilizar:</strong> <span id="preutilizar"></span></p>
+<p><strong>Reciclar:</strong> <span id="preciclar"></span></p>
+<p><strong>Separacion de basura:</strong> <span id="pseparacion"></span></p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECCIÓN: Importancia 3R -->
-    <section id="r">
-      <h2>Importancia de las 3R (Reducir, Reutilizar, Reciclar)</h2>
-      <img src="reciclaje.gif" alt="Símbolo de reciclaje" />
-      <p>Las 3R son una estrategia fundamental para la conservación del medio ambiente. Su objetivo es disminuir la cantidad de residuos que generamos, reducir el consumo de recursos naturales y fomentar una cultura de sostenibilidad.</p>
-      <p><strong>Reducir:</strong> consumir menos y de manera responsable, evitando productos desechables o con empaques innecesarios.</p>
-      <p><strong>Reutilizar:</strong> darle una segunda vida a los objetos, extendiendo su uso y evitando que se conviertan en basura.</p>
-      <p><strong>Reciclar:</strong> transformar los desechos en nuevos productos mediante separación y procesamiento de materiales.</p>
-      <p><strong>Beneficios de aplicar las 3R:</strong></p>
-      <ul>
-        <li>Protege el medio ambiente.</li>
-        <li>Reduce la contaminación de suelo, agua y aire.</li>
-        <li>Ahorrar recursos naturales y energía.</li>
-        <li>Genera conciencia y hábitos de consumo responsable.</li>
-      </ul>
-      <p><strong>Consecuencias si no se aplican:</strong></p>
-      <ul>
-        <li>Acumulación de basura en calles, ríos y mares.</li>
-        <li>Contaminación del suelo, agua y aire.</li>
-        <li>Pérdida de biodiversidad y hábitats naturales.</li>
-        <li>Agotamiento de recursos naturales y mayor consumo energético.</li>
-      </ul>
-    </section>
 
-    <!-- SECCIÓN: Clasificación de la Basura -->
-    <section id="basura">
-      <h2>Clasificación de la Basura</h2>
-      <img src="residuos.gif" alt="Clasificación de residuos" />
-      <p>Clasificar correctamente los residuos es esencial para mantener la limpieza, facilitar el reciclaje y evitar la contaminación del suelo, agua y aire.</p>
-      <p>Los tipos principales de basura son:</p>
-      <ul>
-        <li><strong>Orgánica:</strong> restos de alimentos, hojas, cáscaras y materiales biodegradables. Se puede convertir en composta para enriquecer el suelo.</li>
-        <li><strong>Inorgánica:</strong> plásticos, metales, vidrios y otros materiales no biodegradables que pueden reciclarse si se separan correctamente.</li>
-        <li><strong>Peligrosa:</strong> desechos con sustancias tóxicas o contaminantes, como pilas, aceites, medicamentos o electrónicos. Deben manejarse en centros especializados.</li>
-        <li><strong>Residuos sanitarios:</strong> pañales, toallas sanitarias o cubrebocas, los cuales deben desecharse adecuadamente para evitar riesgos a la salud.</li>
-      </ul>
-      <p>Separar la basura desde el origen facilita su reciclaje, reduce los costos de limpieza y contribuye al equilibrio ambiental. Además, fomenta una cultura ecológica y solidaria con nuestro entorno.</p>
-    </section>
 
     <footer>
       Proyecto PAEC 2025 | CECyTE | Fomentando la conciencia ecológica 🌎
@@ -351,21 +316,29 @@
      * Reemplaza image filenames con tus imágenes en /images/
      *********/
    const PLANTS = [
-  {
-    common: "Manzanilla",
-    scientific: "Matricaria chamomilla",
-    uses: "Antiinflamatoria, calmante digestiva, infusiones para cólicos y relajación.",
-    cuidados: "Luz solar directa parcial, riego moderado, suelo bien drenado.",
-    habitat: "Zonas templadas, campos y jardines.",
-    img: "manzanilla.jpg"
-  },
+ {
+  common: "Manzanilla",
+  scientific: "Matricaria chamomilla",
+  uses: "Antiinflamatoria, calmante digestiva, infusiones para cólicos y relajación.",
+  cuidados: "Luz solar directa parcial, riego moderado, suelo bien drenado.",
+  habitat: "Zonas templadas, campos y jardines.",
+  img: "manzanilla.jpg",
+  reducir: "Preferir manzanilla natural para evitar envases industriales.",
+  reutilizar: "Usar las flores secas para aromatizar espacios o bolsitas relajantes.",
+  reciclar: "Compostar los restos de flores para abono orgánico.",
+  separacion: "Se puede compostar en la sección de orgánicos.",
+},
   {
     common: "Aloe Vera",
     scientific: "Aloe barbadensis miller",
     uses: "Cicatrización, hidratación de piel, gel para quemaduras leves y uso tópico.",
     cuidados: "Luz directa o parcial, riegos esporádicos, sustrato arenoso.",
     habitat: "Climas cálidos y secos, macetas y jardines.",
-    img: "aloevera.jpg"
+    img: "aloevera.jpg",
+    reducir: "Utilizar el gel de aloe vera para hidratar la piel en lugar de cremas comerciales.",
+ reutilizar: "Utilizar las hojas de aloe vera para hacer un gel hidratante casero.",
+ reciclar:" Compostar las hojas secas de aloe vera para crear abono.",
+ separacion: "Se puede compostar en la sección de orgánicos.",
   },
   {
     common: "Lavanda",
@@ -373,7 +346,11 @@
     uses: "Relajante, aromaterapia, repelente natural de insectos, aceites esenciales.",
     cuidados: "Sol pleno, poco riego, suelo con buen drenaje.",
     habitat: "Zonas secas y soleadas.",
-    img: "lavanda.jpg"
+    img: "lavanda.jpg",
+    reducir:" Utilizar lavanda para repeler insectos en lugar de productos químicos.",
+ reutilizar: "Utilizar las flores secas de lavanda para hacer bolsitas aromáticas.",
+reciclar:" Compostar las flores y tallos de lavanda para crear abono.",
+separacion: "Se puede compostar en la sección de orgánicos.",
   },
   {
     common: "Menta",
@@ -381,7 +358,11 @@
     uses: "Digestiva, para infusiones, aroma y condimento en cocina.",
     cuidados: "Sombra parcial a sol, riego regular, puede invadir el jardín (control).",
     habitat: "Zonas húmedas y jardines caseros.",
-    img: "menta.jpg"
+    img: "menta.jpg",
+    reducir: "Utilizar menta fresca en lugar de comprar productos comerciales para el aliento fresco.",
+ reutilizar:" Utilizar las hojas de menta para hacer infusiones y luego agregarlas al compost.",
+ reciclar: "Compostar las hojas y tallos de menta para crear abono.",
+ separacion: "Se puede compostar en la sección de orgánicos.",
   },
   {
     common: "Ruda",
@@ -389,7 +370,11 @@
     uses: "Tradicionalmente usada como repelente, en pequeñas dosis tópicas (consultar uso).",
     cuidados: "Luz solar, riego moderado, resistente.",
     habitat: "Jardines y zonas templadas.",
-    img: "ruda.jpg"
+    img: "ruda.jpg",
+    reducir:" Utilizar ruda para repeler insectos en lugar de productos químicos.",
+    reutilizar:" Utilizar las hojas de ruda para hacer un repelente natural.",
+    reciclar: "Compostar las hojas y tallos de ruda para crear abono.",
+    separacion: "Se puede compostar en la sección de orgánicos.",
   },
   {
     common: "Albahaca",
@@ -397,7 +382,11 @@
     uses: "Culinaria, aromática y medicinal ligera.",
     cuidados: "Luz directa, riego moderado, suelo fértil.",
     habitat: "Macetas y jardines soleados.",
-    img: "albahaca.jpg"
+    img: "albahaca.jpg",
+    reducir: "Utilizar albahaca fresca en lugar de comprar productos comerciales para cocinar.",
+reutilizar:" Utilizar las hojas de albahaca para hacer pesto casero.",
+reciclar:" Compostar las hojas y tallos de albahaca para crear abono.",
+separacion:" Se puede compostar en la sección de orgánicos.",
   },
   {
     common: "Bugambilia",
@@ -405,7 +394,11 @@
     uses: "Decorativa, flores ornamentales.",
     cuidados: "Sol pleno, riego moderado, poda regular.",
     habitat: "Climas cálidos y soleados.",
-    img: "bugambilia.jpg"
+    img: "bugambilia.jpg",
+    reducir: "Utilizar bugambilia como ornamental en lugar de comprar flores frescas.",
+reutilizar:" Utilizar las flores de bugambilia para hacer arreglos florales.",
+ reciclar: "Compostar las flores y tallos de bugambilia para crear abono.",
+ separacion:" Se puede compostar en la sección de orgánicos.",
   },
   {
     common: "Geranio",
@@ -413,7 +406,11 @@
     uses: "Decorativa, repelente natural ligero.",
     cuidados: "Luz directa parcial, riego moderado, suelo bien drenado.",
     habitat: "Macetas y jardines.",
-    img: "geranio.jpg"
+    img: "geranio.jpg",
+    reducir:" Utilizar geranio para repeler insectos en lugar de productos químicos.",
+   reutilizar: "Utilizar las hojas de geranio para hacer un repelente natural.",
+  reciclar: "Compostar las hojas y tallos de geranio para crear abono.",
+  separacion: "Se puede compostar en la sección de orgánicos.",
   },
   {
     common: "Rosa de Castilla",
@@ -421,7 +418,11 @@
     uses: "Decorativa, aromática, uso en infusiones.",
     cuidados: "Luz directa, riego frecuente, poda anual.",
     habitat: "Jardines templados.",
-    img: "rosa_de_castilla.jpg"
+    img: "rosa_de_castilla.jpg",
+    reducir:" Utilizar pétalos de rosa para hacer productos naturales para la piel.",
+    reutilizar:" Utilizar los pétalos de rosa para hacer un tónico facial casero.",
+    reciclar: "Compostar los pétalos y tallos de rosa para crear abono.",
+    separacion: "Se puede compostar en la sección de orgánicos.",
   },
   {
     common: "Hierba Buena",
@@ -429,7 +430,11 @@
     uses: "Digestiva, aromática y culinaria.",
     cuidados: "Luz parcial, riego regular, puede expandirse rápidamente.",
     habitat: "Jardines y huertos caseros.",
-    img: "hierba_buena.jpg"
+    img: "hierba_buena.jpg",
+    reducir: "Utilizar hierba buena fresca en lugar de comprar productos comerciales para el aliento fresco.",
+reutilizar:" Utilizar las hojas de hierba buena para hacer infusiones y luego agregarlas al compost.",
+reciclar:" Compostar las hojas y tallos de hierba buena para crear abono.",
+separacion: "Se puede compostar en la sección de orgánicos.",
   },
   {
     common: "Citronela",
@@ -437,23 +442,35 @@
     uses: "Repelente natural de insectos, aceites esenciales.",
     cuidados: "Sol pleno, riego moderado, suelo bien drenado.",
     habitat: "Climas cálidos, jardines y macetas.",
-    img: "citronela.jpg"
+    img: "citronela.jpg",
+    reducir:" Utilizar citronela para repeler insectos en lugar de productos químicos.",
+reutilizar: "Utilizar el aceite esencial de citronela para hacer un repelente natural.",
+reciclar: "Compostar las hojas y tallos de citronela para crear abono.",
+separacion: "Se puede compostar en la sección de orgánicos.",
   },
-  {
-    common: "Vaporru",
-    scientific: "vaporaria",
-    uses: "Tradicional / medicinal local (información limitada).",
-    cuidados: "Luz solar parcial, riego moderado.",
-    habitat: "Zonas locales según disponibilidad.",
-    img: "vaporru.jpg"
-  },
+ {
+  common: "Vaporru",
+  scientific: "Plectranthus amboinicus",
+  uses: "Utilizada tradicionalmente para aliviar la tos, congestión y malestares respiratorios.",
+  cuidados: "Requiere luz solar parcial, riego moderado y suelo con buen drenaje.",
+  habitat: "Zonas tropicales y templadas; común en jardines domésticos.",
+  img: "vaporru.jpg",
+  reducir: "Preferir remedios naturales de la planta vaporru en lugar de productos comerciales.",
+  reutilizar: "Usar hojas frescas para infusiones o ungüentos naturales.",
+  reciclar: "Compostar hojas secas o restos de poda.",
+  separacion: "Se puede compostar en la sección de residuos orgánicos.",
+},
   {
     common: "Lengua de suegra",
     scientific: "Sansevieria trifasciata",
     uses: "Purifica el aire, ornamental.",
     cuidados: "Luz indirecta, riego escaso, resistente.",
     habitat: "Interior y exterior protegido.",
-    img: "lenguadesuegra.jpg"
+    img: "lenguadesuegra.jpg",
+    reducir: "Utilizar lengua de suegra para purificar el aire en lugar de productos químicos.",
+reutilizar:" Utilizar la planta como ornamental.",
+reciclar: "Compostar las hojas y tallos de lengua de suegra para crear abono.",
+separacion: "Se puede compostar en la sección de orgánicos.",
   },
   {
     common: "Sábila",
@@ -461,7 +478,11 @@
     uses: "Cicatrizante, hidratante, uso medicinal y tópico.",
     cuidados: "Sol directo o parcial, riego escaso, suelo arenoso.",
     habitat: "Climas cálidos y secos.",
-    img: "sabila.jpg"
+    img: "sabila.jpg",
+    reducir:" Utilizar sábila para hidratar la piel en lugar de cremas comerciales.",
+reutilizar: "Utilizar las hojas de sábila para hacer un gel hidratante casero.",
+reciclar: "Compostar las hojas secas de sábila para crear abono.",
+separacion: "Se puede compostar en la sección de orgánicos.",
   },
   {
     common: "Romero",
@@ -469,7 +490,11 @@
     uses: "Culinaria, aromática, medicinal ligera.",
     cuidados: "Sol pleno, riego moderado, suelo bien drenado.",
     habitat: "Zonas templadas y jardines soleados.",
-    img: "romero.jpg"
+    img: "romero.jpg",
+    reducir: "Utilizar romero fresco en lugar de comprar productos comerciales para cocinar.",
+reutilizar: "Utilizar las hojas de romero para hacer un condimento casero.",
+reciclar: "Compostar las hojas y tallos de romero para crear abono.",
+separacion: "Se puede compostar en la sección de orgánicos.",
   }
 ];
 
@@ -633,6 +658,10 @@
       document.getElementById('pUsos').textContent = p.uses;
       document.getElementById('pCuidados').textContent = p.cuidados;
       document.getElementById('pHabitat').textContent = p.habitat;
+      document.getElementById('preducir').textContent = p.reducir;
+document.getElementById('preutilizar').textContent = p.reutilizar;
+document.getElementById('preciclar').textContent = p.reciclar;
+document.getElementById('pseparacion').textContent = p.separacion;
 
       const img = document.getElementById('plantImg');
       img.src = p.img;
@@ -764,49 +793,7 @@
     <p>Eliseo García Chumacero</p>
     <p>Anuar Yael Cadena Lima</p>
   </div>
-
-  <div class="menu">
-    <button onclick="mostrarSeccion('r')">Importancia de las 3R</button>
-    <button onclick="mostrarSeccion('basura')">Clasificación de la Basura</button>
   </div>
-
-  <section id="r">
-    <h2>Importancia de las 3R (Reducir, Reutilizar, Reciclar)</h2>
-    <img src="reciclaje.gif" alt="Símbolo de reciclaje">
-    <p>Las 3R son una estrategia fundamental para la conservación del medio ambiente. Su objetivo es disminuir la cantidad de residuos que generamos, reducir el consumo de recursos naturales y fomentar una cultura de sostenibilidad.</p>
-    <p><strong>Reducir:</strong> consumir menos y de manera responsable, evitando productos desechables o con empaques innecesarios.</p>
-    <p><strong>Reutilizar:</strong> darle una segunda vida a los objetos, extendiendo su uso y evitando que se conviertan en basura.</p>
-    <p><strong>Reciclar:</strong> transformar los desechos en nuevos productos mediante separación y procesamiento de materiales.</p>
-    <p><strong>Beneficios de aplicar las 3R:</strong></p>
-    <ul>
-      <li>Protege el medio ambiente.</li>
-      <li>Reduce la contaminación de suelo, agua y aire.</li>
-      <li>Ahorrar recursos naturales y energía.</li>
-      <li>Genera conciencia y hábitos de consumo responsable.</li>
-    </ul>
-    <p><strong>Consecuencias si no se aplican:</strong></p>
-    <ul>
-      <li>Acumulación de basura en calles, ríos y mares.</li>
-      <li>Contaminación del suelo, agua y aire.</li>
-      <li>Pérdida de biodiversidad y hábitats naturales.</li>
-      <li>Agotamiento de recursos naturales y mayor consumo energético.</li>
-    </ul>
-  </section>
-
-  <section id="basura">
-    <h2>Clasificación de la Basura</h2>
-    <img src="residuos.gif" alt="Clasificación de residuos">
-    <p>Clasificar correctamente los residuos es esencial para mantener la limpieza, facilitar el reciclaje y evitar la contaminación del suelo, agua y aire.</p>
-    <p>Los tipos principales de basura son:</p>
-    <ul>
-      <li><strong>Orgánica:</strong> restos de alimentos, hojas, cáscaras y materiales biodegradables. Se puede convertir en composta para enriquecer el suelo.</li>
-      <li><strong>Inorgánica:</strong> plásticos, metales, vidrios y otros materiales no biodegradables que pueden reciclarse si se separan correctamente.</li>
-      <li><strong>Peligrosa:</strong> desechos con sustancias tóxicas o contaminantes, como pilas, aceites, medicamentos o electrónicos. Deben manejarse en centros especializados.</li>
-      <li><strong>Residuos sanitarios:</strong> pañales, toallas sanitarias o cubrebocas, los cuales deben desecharse adecuadamente para evitar riesgos a la salud.</li>
-    </ul>
-    <p>Separar la basura desde el origen facilita su reciclaje, reduce los costos de limpieza y contribuye al equilibrio ambiental. Además, fomenta una cultura ecológica y solidaria con nuestro entorno.</p>
-  </section>
-
   <script>
     function mostrarSeccion(id) {
       document.querySelectorAll('section').forEach(s => s.style.display = 'none');
